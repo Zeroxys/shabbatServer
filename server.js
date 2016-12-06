@@ -29,7 +29,7 @@ app.get('/', (req,res) => {
   res.status(200).send('server')
 })
 
-app.get('/pago', (req,res,err) => {
+app.get('/charges', (req,res,err) => {
   var chargeRequest = {
      'source_id' : token_id,
      'method' : 'card',
