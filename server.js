@@ -48,7 +48,8 @@ app.get('/charges', (req,res,err) => {
 
     };
   });  
-  res.status(200).json(chargeRequest)
+  res.status(200).json({hola:'hola'})
+  console.log("worked it")
 })
 
 //App listen
