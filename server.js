@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 //Peticiones
 
 app.get('/', (req,res) => {
-  res.status(200).json({hola : 'hola'})
+  res.status(200).send('server')
 })
 
 app.get('/pago', (req,res,err) => {
