@@ -43,11 +43,11 @@ app.post('/charges', (req,res,err) => {
           'email' : email
      }
   } 
-  openpay.charges.create(chargeRequest, function(error, charge) {
+  /*  openpay.charges.create(chargeRequest, function(error, charge) {
     if (error){
 
     };
-  });  
+  });*/  
   res.status(200).json({hola:'hola'})
   console.log("worked it")
 })
