@@ -33,15 +33,29 @@ app.get('/', function (req,res) {
 })
 
 app.post('/charges', function (req,res) {
-  var chargeRequest = req.body
-  /*  openpay.charges.create(chargeRequest, function(error, charge) {
-    if (error){
+  //var chargeRequest = req.body
 
-    };
-  });*/
-  if (chargeRequest){
-    res.status(200).json({message:'producto recibido',
-    product:chargeRequest})
+  var chargeRequest = {
+  "method": "card",
+  "card": {
+    "card_number": "4111111111111111",
+    "holder_name": "John Doe",
+    "expiration_year": "20",
+    "expiration_month": "12",
+    "cvv2": "110",
+  },
+  "amount" : 200.00,
+  "description" : "Service Charge",
+  "order_id" : "oid-00721"
+};
+
+  if(chargeRequest) {
+    openpay.charges.create(chargeRequest, function(error, charge) {
+        if (err){
+          console.log(error)
+      }
+      res.status(200).json({message:'producto recibido',product:chargeRequest})  
+    }  
   }else{
     res.status(404).json({
       message: 'error al recibir al cliente',
