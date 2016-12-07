@@ -29,27 +29,15 @@ app.get('/', (req,res) => {
   res.status(200).send('server')
 })
 
-app.post('/charges', (req,res,err) => {
-  var chargeRequest = {
-     'source_id' : token_id,
-     'method' : 'card',
-     'amount' : amount,
-     'description' : description,
-     'device_session_id' : device_session_id,
-     'customer' : {
-          'name' : name,
-          'last_name' : last_name,
-          'phone_number' : phone_number,
-          'email' : email
-     }
-  } 
+app.post('/charges', (req,res) => {
+  var chargeRequest(req.body)
   /*  openpay.charges.create(chargeRequest, function(error, charge) {
     if (error){
 
     };
   });*/  
-  res.status(200).json({hola:'hola'})
-  console.log("worked it")
+  res.status(200).json({message:'producto recibido',
+  product:'chargeRequest'})
 })
 
 //App listen
