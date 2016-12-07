@@ -22,15 +22,15 @@ app.use( (req,res,next)=> {
 })
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+app.use(express.static('template'))
 
 //Peticiones
-
-app.get('/', (req,res) => {
-  res.status(200).send('server')
+app.get('/', function (req,res) {
+  res.status(200).sendFile(__dirname + "index.html")
 })
 
-app.post('/charges', (req,res) => {
-  var chargeRequest(req.body)
+app.post('/charges', function (req,res) {
+  var chargeRequest = (req.body)
   /*  openpay.charges.create(chargeRequest, function(error, charge) {
     if (error){
 
@@ -41,7 +41,7 @@ app.post('/charges', (req,res) => {
 })
 
 //App listen
-app.listen(port, (err) => {
+app.listen(port, function (err) {
   if (err) {
     res.status(500).json({err:err})
     console.log(`Ha ocurrido el siguiente error : ${err}`)
