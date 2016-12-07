@@ -36,10 +36,10 @@ app.post('/charges', function (req,res) {
   var chargeRequest = req.body
 
   if(chargeRequest) {
-      res.status(200).json({message:'producto recibido en el servidor',product:chargeRequest})
       openpay.charges.create(chargeRequest, function(err,charge){
         if (err) {console.log(err)}
-          console.log(charge)
+        console.log(charge)
+      res.status(200).json({message:'producto recibido en el servidor',product:chargeRequest})
       })  
     }else{
     res.status(404).json({
