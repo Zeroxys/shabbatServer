@@ -52,7 +52,7 @@ app.post('/charges', function (req,res) {
   if(chargeRequest) {
     openpay.charges.create(chargeRequest, function(error, charge) {
         if (err){
-          console.log(error)
+          
       }
       res.status(200).json({message:'producto recibido',product:chargeRequest})  
     }  
