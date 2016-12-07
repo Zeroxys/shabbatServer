@@ -1,6 +1,7 @@
 const express = require('express')
 const Openpay = require('openpay')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const port = process.env.PORT || 8080 
 
@@ -9,7 +10,7 @@ const app = express()
 
 
 //Middleware de control de acceso
-app.use( (req,res,next)=> {
+/*app.use( (req,res,next)=> {
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', req.headers.origin);
   res.header('Acess-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -20,7 +21,8 @@ app.use( (req,res,next)=> {
   }else{
     next();
   }
-})
+})*/
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(express.static('template'))
