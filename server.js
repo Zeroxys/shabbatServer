@@ -1,7 +1,8 @@
 const express = require('express')
 const Openpay = require('openpay')
 const bodyParser = require('body-parser')
-const port = 8080 || process.env.PORT
+
+const port = process.env.PORT || 8080 
 
 const openpay = new Openpay('mghu5rdshfetmetuepbv', 'sk_89848887b87249fb99572b7d12f3a0d5');
 const app = express()
