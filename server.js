@@ -8,20 +8,6 @@ const port = process.env.PORT || 8080
 const openpay = new Openpay('mghu5rdshfetmetuepbv', 'sk_89848887b87249fb99572b7d12f3a0d5');
 const app = express()
 
-
-//Middleware de control de acceso
-/*app.use( (req,res,next)=> {
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
-  res.header('Acess-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Acess-Control-Allow-Headers',
-            'X-Request-With, X-HTTP-Method-Override,Content-Type,Accept');
-  if ('OPTIONS' === req.method) {
-    res.status(200).end()
-  }else{
-    next();
-  }
-})*/
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
@@ -35,16 +21,19 @@ app.get('/', function (req,res) {
 app.post('/charges', function (req,res) {
   var chargeRequest = req.body
 
-  if(chargeRequest) {
-      openpay.charges.create(chargeRequest, function(err,charge){
-        if (err) {console.log(err)}
+  if(chargeRequest !== undefined) {
+
+    openpay.charges.create(chargeRequest, function(error,charge){  
+      if (error) {
+        console.log(error)
+        res.status(200).json({message:'producto fue recibido con error',product:chargeRequest})
+      }else{
         console.log(charge)
-      res.status(200).json({message:'producto recibido en el servidor',product:chargeRequest})
-      })  
-    }else{
-    res.status(404).json({
-      message: 'error al recibir al cliente',
-      type: `chargeRequest :  ${chargeRequest} `
+        res.status(200).json({message:'generando el cargo ' + charge})
+      }
+    })
+  }else{
+      res.status(404).json({message: 'error al recibir al cliente',type: `chargeRequest :  ${chargeRequest} `
     })
   }  
 
